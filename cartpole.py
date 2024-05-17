@@ -7,7 +7,9 @@ from mushroom_rl.features import Features
 from mushroom_rl.features.basis import PolynomialBasis, GaussianRBF
 from mushroom_rl.policy import EpsGreedy
 from mushroom_rl.rl_utils.parameters import Parameter
+from mushroom_rl.environments import Gymnasium
 
+import custom_cartpole_mushroom
 import custom_cartpole
 
 import tkinter as tk
@@ -24,6 +26,10 @@ massPole=2. #m
 massCart=8. #M
 poleLength=.5 #l
 
+colors={"backGr": (0, 176, 203),
+		"cartColor": (22, 112, 19),
+        "poleColor": (167, 255, 164)}
+
 #add form frame
 cart_frame = tk.LabelFrame(root, padx=20, pady=20, bd=0)
 cart_frame.grid(row=0, column=0)
@@ -35,7 +41,9 @@ def experiment():
     np.random.seed()
 
     # MDP
-    mdp = custom_cartpole.CustomCartPole(m=massPole, M=massCart, l=poleLength)
+    mdp = custom_cartpole_mushroom.CustomCartPole(m=massPole, M=massCart, l=poleLength)
+    #mdp = Gymnasium('CustomCartPole-v0', selected_colors=colors, mass_cart= massCart, mass_pole= massPole, pole_lenght= poleLength)
+    #mdp = Gymnasium("CartPole-v1")
 
     # Policy
     epsilon = Parameter(value=1.)

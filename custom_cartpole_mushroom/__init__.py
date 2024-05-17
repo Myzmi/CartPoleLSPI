@@ -1,0 +1,2 @@
+from custom_cartpole_mushroom.envs.custom_cartpole_env import CustomCartPole
+CustomCartPole.register()
